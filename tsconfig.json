@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/api/register/route.js"  ],
+, "app/api/register/route.js", "next.config.js"  ],
   "exclude": ["node_modules"]
 }
