@@ -1,4 +1,3 @@
-// components/RegistrationForm.jsx
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
@@ -37,7 +36,6 @@ import {
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
-// Simple English translations only
 const translations = {
   title: 'Competition Registration',
   subtitle: 'Fill in your details to participate',
@@ -64,7 +62,6 @@ const translations = {
   iot: 'IoT & Robotics',
   security: 'Network & Security',
   media: 'Media Team',
-  // Specializations
   webSpecialization: 'Choose your specialization',
   frontend: 'Frontend Development',
   backend: 'Backend Development',
@@ -133,7 +130,6 @@ export default function RegistrationForm({ onBack }) {
 
   const t = translations
 
-  // Check deadline
   useEffect(() => {
     const checkDeadline = () => {
       const now = new Date()
@@ -142,7 +138,7 @@ export default function RegistrationForm({ onBack }) {
     }
     
     checkDeadline()
-    const interval = setInterval(checkDeadline, 60000) // Check every minute
+    const interval = setInterval(checkDeadline, 60000) 
     
     return () => clearInterval(interval)
   }, [])
@@ -153,7 +149,6 @@ export default function RegistrationForm({ onBack }) {
     if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required'
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) newErrors.email = 'Valid email is required'
     
-    // Algeria phone number validation (10 digits, starts with 0, only numbers)
     const phoneRegex = /^0[5-7][0-9]{8}$/
     if (!formData.phone) {
       newErrors.phone = 'Phone number is required'
@@ -181,7 +176,6 @@ export default function RegistrationForm({ onBack }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Check deadline first
     if (deadlinePassed) {
       setErrors({ deadline: 'Registration closed on February 22, 2026 at 23:59' })
       return
@@ -207,7 +201,6 @@ export default function RegistrationForm({ onBack }) {
         throw new Error(data.error || 'Registration failed')
       }
 
-      // Success
       setIsSubmitting(false)
       setIsSuccess(true)
       
@@ -220,10 +213,8 @@ export default function RegistrationForm({ onBack }) {
   const handleChange = (e) => {
     const { name, value } = e.target
     
-    // For phone, only allow numbers
     if (name === 'phone') {
       const numbersOnly = value.replace(/[^0-9]/g, '')
-      // Limit to 10 digits
       if (numbersOnly.length <= 10) {
         setFormData(prev => ({ ...prev, [name]: numbersOnly }))
       }
@@ -242,7 +233,6 @@ export default function RegistrationForm({ onBack }) {
 
   const selectedCategory = categories.find(c => c.id === formData.category)
 
-  // If deadline passed, show deadline message
   if (deadlinePassed) {
     return (
       <div className="min-h-screen bg-[#121B21] flex items-center justify-center p-4">
@@ -271,7 +261,7 @@ export default function RegistrationForm({ onBack }) {
               <p className="text-gray-300 text-sm">
                 <span className="block mb-1">📅 February 24, 2026</span>
                 <span className="block mb-1">⏰ 8:30 AM </span>
-                <span className="block">📍 University HASSIBA BENBOUALI - Department MI</span>
+                <span className="block">📍 University HASSIBA BENBOUALI - Department Department Computer Science</span>
               </p>
             </div>
 
@@ -291,7 +281,6 @@ export default function RegistrationForm({ onBack }) {
 
   return (
     <div className="min-h-screen bg-[#121B21] flex items-center justify-center p-4 py-8">
-      {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-custom opacity-90" />
         <div className="absolute top-0 left-0 w-full h-full">
@@ -300,13 +289,11 @@ export default function RegistrationForm({ onBack }) {
         </div>
       </div>
 
-      {/* Form Container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 w-full max-w-2xl"
       >
-        {/* Back Button */}
         <motion.button
           onClick={onBack}
           className="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
@@ -339,7 +326,6 @@ export default function RegistrationForm({ onBack }) {
                 <p className="text-gray-400 text-sm">{t.successMessage}</p>
               </div>
               
-              {/* Competition Details Card */}
               <div className="bg-gradient-to-br from-[#198ACD10] to-[#28BBE810] rounded-xl p-5 mb-6 border border-[#28BBE8]20">
                 <h3 className="text-[#28BBE8] font-semibold mb-3 flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
@@ -375,13 +361,12 @@ export default function RegistrationForm({ onBack }) {
                     <div>
                       <p className="text-gray-400 text-xs">Location</p>
                       <p className="text-white font-medium">University HASSIBA BENBOUALI</p>
-                      <p className="text-gray-300 text-sm">Department MI</p>
+                      <p className="text-gray-300 text-sm">Department Computer Science</p>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* What to Bring Card */}
               <div className="bg-[#854d0e20] rounded-xl p-5 mb-6 border border-[#854d0e]">
                 <h3 className="text-[#fbbf24] font-semibold mb-3 flex items-center gap-2">
                   <Laptop className="w-4 h-4" />
@@ -414,7 +399,6 @@ export default function RegistrationForm({ onBack }) {
                 </div>
               </div>
               
-              {/* Check-in Note */}
               <div className="bg-[#198ACD10] rounded-lg p-4 mb-6 border border-[#198ACD]30">
                 <p className="text-gray-300 text-sm text-center">
                   ⏰ <span className="text-white font-medium">8:30 AM sharp:</span> Check-in with your student ID 
@@ -439,7 +423,6 @@ export default function RegistrationForm({ onBack }) {
               exit={{ opacity: 0, y: -20 }}
               className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
             >
-              {/* Header */}
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-14 h-14">
                   <Image
@@ -455,7 +438,6 @@ export default function RegistrationForm({ onBack }) {
                 </div>
               </div>
 
-              {/* Deadline Warning */}
               <div className="bg-[#854d0e20] border border-[#854d0e] rounded-lg p-3 mb-6">
                 <p className="text-[#fbbf24] text-sm flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 flex-shrink-0" />
@@ -463,7 +445,6 @@ export default function RegistrationForm({ onBack }) {
                 </p>
               </div>
 
-              {/* IoT Alert */}
               {formData.category === 'iot' && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -483,7 +464,6 @@ export default function RegistrationForm({ onBack }) {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Full Name */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <User className="w-4 h-4 inline mr-2" />
@@ -506,7 +486,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Mail className="w-4 h-4 inline mr-2" />
@@ -529,7 +508,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Phone */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Phone className="w-4 h-4 inline mr-2" />
@@ -554,7 +532,6 @@ export default function RegistrationForm({ onBack }) {
                   <p className="text-xs text-gray-500 mt-1">Enter 10-digit Algeria number (e.g., 0550123456)</p>
                 </div>
 
-                {/* Matricule */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Hash className="w-4 h-4 inline mr-2" />
@@ -577,7 +554,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Level */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <BookOpen className="w-4 h-4 inline mr-2" />
@@ -605,7 +581,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Category */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     {t.category}
@@ -659,7 +634,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Specialization (only for Web and Media) */}
                 {selectedCategory?.hasSpecialization && formData.category && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
@@ -711,7 +685,6 @@ export default function RegistrationForm({ onBack }) {
                   </motion.div>
                 )}
 
-                {/* GitHub Link */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
                     <Github className="w-4 h-4 inline mr-2" />
@@ -734,7 +707,6 @@ export default function RegistrationForm({ onBack }) {
                   )}
                 </div>
 
-                {/* Submit Error Message */}
                 {errors.submit && (
                   <p className="text-sm text-red-500 text-center">{errors.submit}</p>
                 )}
@@ -742,7 +714,6 @@ export default function RegistrationForm({ onBack }) {
                   <p className="text-sm text-red-500 text-center">{errors.deadline}</p>
                 )}
 
-                {/* Submit Button */}
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}

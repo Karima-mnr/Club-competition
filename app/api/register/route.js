@@ -1,4 +1,3 @@
-// app/api/register/route.js
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Student from '@/models/Student';
@@ -6,13 +5,10 @@ import { sendRegistrationConfirmation } from '@/utils/sendEmail';
 
 export async function POST(request) {
   try {
-    // Connect to MongoDB
     await connectDB();
 
-    // Get form data from request
     const body = await request.json();
     
-    // Validate required fields
     const requiredFields = ['fullName', 'email', 'phone', 'matricule', 'level', 'category'];
     for (const field of requiredFields) {
       if (!body[field]) {
@@ -23,7 +19,6 @@ export async function POST(request) {
       }
     }
 
-    // Check if student already exists with same email or matricule
     const existingStudent = await Student.findOne({
       $or: [
         { email: body.email },
@@ -46,7 +41,6 @@ export async function POST(request) {
       }
     }
 
-    // Create new student document
     const student = new Student({
       fullName: body.fullName,
       email: body.email,
@@ -57,13 +51,11 @@ export async function POST(request) {
       specialization: body.specialization || null,
       github: body.github || null,
       registeredAt: new Date(),
-      status: 'pending'  // ← CHANGED FROM 'registered' TO 'pending'
+      status: 'pending' 
     });
 
-    // Save to database
     await student.save();
 
-    // Send confirmation email
     try {
       await sendRegistrationConfirmation({
         email: student.email,
@@ -73,10 +65,8 @@ export async function POST(request) {
       });
     } catch (emailError) {
       console.error('Confirmation email failed:', emailError);
-      // Don't fail registration if email fails
     }
 
-    // Return success response
     return NextResponse.json({
       success: true,
       message: 'Registration successful! Check your email for confirmation.',
@@ -91,7 +81,6 @@ export async function POST(request) {
   } catch (error) {
     console.error('Registration error:', error);
     
-    // Handle duplicate key error
     if (error.code === 11000) {
       const field = Object.keys(error.keyPattern)[0];
       return NextResponse.json(
@@ -100,7 +89,6 @@ export async function POST(request) {
       );
     }
 
-    // Handle validation errors
     if (error.name === 'ValidationError') {
       const validationErrors = Object.values(error.errors).map(err => err.message);
       return NextResponse.json(
@@ -109,7 +97,6 @@ export async function POST(request) {
       );
     }
 
-    // Generic error
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

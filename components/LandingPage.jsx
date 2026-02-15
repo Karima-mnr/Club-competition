@@ -1,4 +1,3 @@
-// components/LandingPage.jsx
 'use client'
 
 import { motion } from 'framer-motion'
@@ -39,7 +38,6 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import RegistrationForm from './RegistrationForm'
 
-// Language translations
 const translations = {
   en: {
     clubBadge: "InfoBrains Club Recruitment",
@@ -94,7 +92,6 @@ const translations = {
     activity4: "Project Collaborations",
     activity5: "Guest Speakers",
     activity6: "Social Gatherings",
-    // Timer section
     timerTitle: "Registration",
     timerGradient: "Deadline",
     timerDescription: "Register before the deadline to participate",
@@ -158,7 +155,6 @@ const translations = {
     activity4: "Projets Collaboratifs",
     activity5: "Conférenciers Invités",
     activity6: "Rencontres Sociales",
-    // Timer section
     timerTitle: "Fin des",
     timerGradient: "Inscriptions",
     timerDescription: "Inscrivez-vous avant la date limite pour participer",
@@ -222,7 +218,6 @@ const translations = {
     activity4: "مشاريع تعاونية",
     activity5: "متحدثون ضيوف",
     activity6: "لقاءات اجتماعية",
-    // Timer section
     timerTitle: "آخر موعد",
     timerGradient: "للتسجيل",
     timerDescription: "سجل قبل انتهاء الموعد النهائي للمشاركة",
@@ -346,7 +341,6 @@ export default function LandingPage() {
   const [language, setLanguage] = useState('en')
   const t = translations[language]
 
-  // Timer state
   const [timeLeft, setTimeLeft] = useState({
     registration: { days: 0, hours: 0, minutes: 0, seconds: 0 },
     competition: { days: 0, hours: 0, minutes: 0, seconds: 0 }
@@ -359,7 +353,6 @@ export default function LandingPage() {
     const timer = setInterval(() => {
       const now = new Date().getTime()
 
-      // Registration countdown
       const registrationDistance = registrationDeadline - now
       const competitionDistance = competitionStart - now
 
@@ -388,7 +381,6 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen bg-[#121B21] overflow-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-custom opacity-90" />
         <motion.div 
@@ -422,7 +414,6 @@ export default function LandingPage() {
         </motion.div>
       </div>
 
-      {/* Static Background Shapes */}
       <div className="fixed inset-0 pointer-events-none">
         <motion.div 
           className="absolute top-20 left-10 w-72 h-72 rounded-full"
@@ -460,7 +451,6 @@ export default function LandingPage() {
         />
       </div>
 
-      {/* Language Switcher */}
       <div className="fixed top-6 right-6 z-50 flex gap-2">
         {['en', 'fr', 'ar'].map((lang) => (
           <motion.button
@@ -479,13 +469,11 @@ export default function LandingPage() {
         ))}
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4 py-0">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-32 items-center">
-              {/* Left Content */}
               <motion.div
                 initial={{ opacity: 0, x: language === 'ar' ? 50 : -50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -566,7 +554,6 @@ export default function LandingPage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right Content - Floating Elements */}
               <motion.div
                 className="relative hidden lg:block h-[600px]"
                 initial={{ opacity: 0, x: language === 'ar' ? -50 : 50 }}
@@ -673,7 +660,6 @@ export default function LandingPage() {
                 <p className="text-center text-gray-500 mt-4">22 February 2024 • 00:00</p>
               </motion.div>
 
-              {/* Competition Start */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -879,7 +865,6 @@ export default function LandingPage() {
                 border: '1px solid rgba(255,255,255,0.1)'
               }}
             >
-              {/* Simple animated background */}
               <motion.div
                 className="absolute inset-0 opacity-30"
                 animate={{
@@ -941,12 +926,9 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="relative border-t border-white/10 bg-[#121B21]/50 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 py-16">
-            {/* Main Footer Content */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-              {/* Brand Column */}
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="relative w-12 h-12">
@@ -965,7 +947,6 @@ export default function LandingPage() {
                   {t.footerTagline}
                 </p>
                 
-                {/* Contact Info */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-gray-400">
                     <Mail className="w-5 h-5 text-[#198ACD]" />
@@ -982,7 +963,6 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Quick Links */}
               <div>
                 <h3 className="text-white font-semibold mb-4">{t.competitionLinks}</h3>
                 <ul className="space-y-2">
@@ -999,7 +979,6 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Support Links */}
               <div>
                 <h3 className="text-white font-semibold mb-4">{t.supportLinks}</h3>
                 <ul className="space-y-2">
@@ -1016,7 +995,6 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              {/* Legal Links */}
               <div>
                 <h3 className="text-white font-semibold mb-4">{t.legalLinks}</h3>
                 <ul className="space-y-2">
@@ -1034,13 +1012,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Newsletter & Social */}
             <div className="py-8 border-t border-white/10">
               <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-                {/* Newsletter */}
-       
-
-                {/* Social Links */}
                 <div className="flex gap-4 ml-[1000px]">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -1056,10 +1029,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Bottom Bar */}
             <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-500 text-sm">
-                © 2024 InfoBrains. {language === 'en' ? 'All rights reserved.' : language === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
+                © 2026 InfoBrains. {language === 'en' ? 'All rights reserved.' : language === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
               </p>
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <span>{t.madeWith}</span>
@@ -1073,7 +1045,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Decorative Elements */}
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#198ACD] to-transparent opacity-20" />
           </div>
         </footer>

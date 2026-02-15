@@ -1,9 +1,7 @@
-// utils/sendEmail.js
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
-// Create transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -12,21 +10,19 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify connection configuration
 transporter.verify(function(error, success) {
   if (error) {
-    console.log('❌ Email server connection error:', error);
+    console.log(' Email server connection error:', error);
   } else {
-    console.log('✅ Email server is ready to send messages');
+    console.log(' Email server is ready to send messages');
   }
 });
 
 export async function sendRegistrationConfirmation(studentData) {
-  console.log('📧 Attempting to send email to:', studentData.email);
+  console.log(' Attempting to send email to:', studentData.email);
   
   const { email, fullName, category, level } = studentData;
 
-  // Format category name for display
   const categoryDisplay = {
     web: 'Web Development',
     mobile: 'Mobile Development',
@@ -36,7 +32,6 @@ export async function sendRegistrationConfirmation(studentData) {
     media: 'Media Team'
   }[category] || category;
 
-  // Determine category-specific message
   const categoryMessage = category === 'iot' 
     ? 'Bring your IoT/Robotics projects to showcase!'
     : 'Bring a project you\'ve built before to showcase your skills!';
@@ -211,7 +206,7 @@ export async function sendRegistrationConfirmation(studentData) {
                                     <td style="padding-left: 15px; vertical-align: middle;">
                                       <p style="color: #6B7280; font-size: 13px; margin: 0 0 3px;">Location</p>
                                       <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">University HASSIBA BENBOUALI</p>
-                                      <p style="color: #28BBE8; font-size: 14px; margin: 3px 0 0;">Department MI</p>
+                                      <p style="color: #28BBE8; font-size: 14px; margin: 3px 0 0;">Department Computer Science (Salle bibliothèque et le 2 salles en 2eme étage)</p>
                                     </td>
                                   </tr>
                                 </table>
@@ -393,7 +388,7 @@ export async function sendRegistrationConfirmation(studentData) {
     console.log('📨 Message ID:', info.messageId);
     return true;
   } catch (error) {
-    console.error('❌ Error sending email:', error);
+    console.error(' Error sending email:', error);
     throw error;
   }
 }

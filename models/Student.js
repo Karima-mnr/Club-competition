@@ -1,4 +1,3 @@
-// models/Student.js
 import mongoose from 'mongoose';
 
 const studentSchema = new mongoose.Schema({
@@ -55,10 +54,8 @@ const studentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   }
-  // status field removed
 });
 
-// Check if model exists before creating new one
 const Student = mongoose.models.Student || mongoose.model('Student', studentSchema);
 
 export default Student;
