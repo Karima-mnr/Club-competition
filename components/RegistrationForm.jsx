@@ -270,7 +270,7 @@ export default function RegistrationForm({ onBack }) {
               </div>
               <p className="text-gray-300 text-sm">
                 <span className="block mb-1">📅 February 24, 2026</span>
-                <span className="block mb-1">⏰ 8:30 AM - 5:00 PM</span>
+                <span className="block mb-1">⏰ 8:30 AM </span>
                 <span className="block">📍 University HASSIBA BENBOUALI - Department MI</span>
               </p>
             </div>
