@@ -190,7 +190,7 @@ export async function sendRegistrationConfirmation(studentData) {
                                     </td>
                                     <td style="padding-left: 15px; vertical-align: middle;">
                                       <p style="color: #6B7280; font-size: 13px; margin: 0 0 3px;">Time</p>
-                                      <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">8:30 AM - 5:00 PM</p>
+                                      <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">8:30 AM </p>
                                       <p style="color: #28BBE8; font-size: 13px; margin: 3px 0 0;">Please arrive at 8:30 AM for check-in</p>
                                     </td>
                                   </tr>

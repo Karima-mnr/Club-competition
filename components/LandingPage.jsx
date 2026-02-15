@@ -562,13 +562,7 @@ export default function LandingPage() {
                     />
                   </motion.button>
                   
-                  <motion.button
-                    className="px-8 py-4 border-2 border-[#198ACD] text-white font-semibold rounded-lg hover:bg-[#198ACD]/10 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {t.learnMore}
-                  </motion.button>
+
                 </motion.div>
               </motion.div>
 
