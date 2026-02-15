@@ -349,7 +349,7 @@ export default function RegistrationForm({ onBack }) {
                     </div>
                     <div>
                       <p className="text-gray-400 text-xs">Time</p>
-                      <p className="text-white font-medium">8:30 AM - 5:00 PM</p>
+                      <p className="text-white font-medium">8:30 AM </p>
                       <p className="text-[#28BBE8] text-xs mt-1">Please arrive at 8:30 AM for check-in</p>
                     </div>
                   </div>
