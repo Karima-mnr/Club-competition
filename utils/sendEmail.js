@@ -206,7 +206,7 @@ export async function sendRegistrationConfirmation(studentData) {
                                     <td style="padding-left: 15px; vertical-align: middle;">
                                       <p style="color: #6B7280; font-size: 13px; margin: 0 0 3px;">Location</p>
                                       <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">University HASSIBA BENBOUALI</p>
-                                      <p style="color: #28BBE8; font-size: 14px; margin: 3px 0 0;">Department Computer Science (Salle bibliothèque et le 2 salles en 2eme étage)</p>
+                                      <p style="color: #28BBE8; font-size: 14px; margin: 3px 0 0;">Department of Computer Science  (Library Room , rooms 6 & 7, 2nd floor)</p>
                                     </td>
                                   </tr>
                                 </table>

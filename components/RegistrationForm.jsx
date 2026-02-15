@@ -261,7 +261,7 @@ export default function RegistrationForm({ onBack }) {
               <p className="text-gray-300 text-sm">
                 <span className="block mb-1">📅 February 24, 2026</span>
                 <span className="block mb-1">⏰ 8:30 AM </span>
-                <span className="block">📍 University HASSIBA BENBOUALI - Department Department Computer Science</span>
+                <span className="block">📍 University HASSIBA BENBOUALI - Department  of Computer Science</span>
               </p>
             </div>
 
@@ -361,7 +361,7 @@ export default function RegistrationForm({ onBack }) {
                     <div>
                       <p className="text-gray-400 text-xs">Location</p>
                       <p className="text-white font-medium">University HASSIBA BENBOUALI</p>
-                      <p className="text-gray-300 text-sm">Department Computer Science</p>
+                      <p className="text-gray-300 text-sm">Department  of Computer Science</p>
                     </div>
                   </div>
                 </div>
