@@ -311,13 +311,10 @@ export async function sendRegistrationConfirmation(studentData) {
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                               <tr>
                                 <td width="40" style="vertical-align: top;">
-                                  <div style="background: #854d0e; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                    <span style="color: white; font-size: 18px; font-weight: bold;">!</span>
-                                  </div>
                                 </td>
                                 <td style="padding-left: 15px;">
                                   <h4 style="color: #fbbf24; font-size: 18px; font-weight: 600; margin: 0 0 8px;">IoT & Robotics Participants</h4>
-                                  <p style="color: #fef3c7; font-size: 15px; margin: 0; line-height: 1.5;">Please bring your IoT/Robotics projects to demonstrate during the competition!</p>
+                                  <p style="color: #746421; font-size: 15px; margin: 0; line-height: 1.5;">Please bring your IoT/Robotics projects to demonstrate during the competition!</p>
                                 </td>
                               </tr>
                             </table>
