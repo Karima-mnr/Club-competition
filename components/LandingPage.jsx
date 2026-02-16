@@ -657,7 +657,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-gray-500 mt-4">22 February 2024 • 00:00</p>
+                <p className="text-center text-gray-500 mt-4">22 February 2026 • 00:00</p>
               </motion.div>
 
               <motion.div
@@ -685,7 +685,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-gray-500 mt-4">24 February 2024 • 00:00</p>
+                <p className="text-center text-gray-500 mt-4">24 February 2026 • 00:00</p>
               </motion.div>
             </div>
           </div>
