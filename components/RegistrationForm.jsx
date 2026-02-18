@@ -77,7 +77,7 @@ const translations = {
   processing: 'Processing...',
   agree: 'By registering, you agree to participate in the competition and receive emails about it.',
   deadlinePassed: 'Registration Deadline Passed',
-  deadlineMessage: 'Sorry, registration closed on February 22, 2026 at 23:59. See you at the competition!',
+  deadlineMessage: 'Sorry, registration closed on February 23, 2026 at 23:59. See you at the competition!',
   placeholder: {
     fullName: 'Enter your full name',
     email: 'Enter your email',
@@ -133,7 +133,7 @@ export default function RegistrationForm({ onBack }) {
   useEffect(() => {
     const checkDeadline = () => {
       const now = new Date()
-      const deadline = new Date('2026-02-22T23:59:59')
+      const deadline = new Date('2026-02-23T23:59:59')
       setDeadlinePassed(now > deadline)
     }
     
@@ -441,7 +441,7 @@ export default function RegistrationForm({ onBack }) {
               <div className="bg-[#854d0e20] border border-[#854d0e] rounded-lg p-3 mb-6">
                 <p className="text-[#fbbf24] text-sm flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                  Registration closes February 22, 2026 at 23:59
+                  Registration closes February 23, 2026 at 23:59
                 </p>
               </div>
 
