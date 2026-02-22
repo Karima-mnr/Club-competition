@@ -77,7 +77,7 @@ const translations = {
   processing: 'Processing...',
   agree: 'By registering, you agree to participate in the competition and receive emails about it.',
   deadlinePassed: 'Registration Deadline Passed',
-  deadlineMessage: 'Sorry, registration closed on February 23, 2026 at 23:59. See you at the competition!',
+  deadlineMessage: 'Sorry, registration closed on February 27, 2026 at 23:59. See you at the competition!',
   placeholder: {
     fullName: 'Enter your full name',
     email: 'Enter your email',
@@ -133,7 +133,7 @@ export default function RegistrationForm({ onBack }) {
   useEffect(() => {
     const checkDeadline = () => {
       const now = new Date()
-      const deadline = new Date('2026-02-23T23:59:59')
+      const deadline = new Date('2026-02-27T23:59:59')
       setDeadlinePassed(now > deadline)
     }
     
@@ -177,7 +177,7 @@ export default function RegistrationForm({ onBack }) {
     e.preventDefault()
     
     if (deadlinePassed) {
-      setErrors({ deadline: 'Registration closed on February 22, 2026 at 23:59' })
+      setErrors({ deadline: 'Registration closed on February 27, 2026 at 23:59' })
       return
     }
     
@@ -259,7 +259,7 @@ export default function RegistrationForm({ onBack }) {
                 <span className="text-[#fbbf24] font-semibold">Competition Day:</span>
               </div>
               <p className="text-gray-300 text-sm">
-                <span className="block mb-1">📅 February 24, 2026</span>
+                <span className="block mb-1">📅 March 3, 2026</span>
                 <span className="block mb-1">⏰ 8:30 AM </span>
                 <span className="block">📍 University HASSIBA BENBOUALI - Department  of Computer Science</span>
               </p>
@@ -339,7 +339,7 @@ export default function RegistrationForm({ onBack }) {
                     </div>
                     <div>
                       <p className="text-gray-400 text-xs">Date</p>
-                      <p className="text-white font-medium">February 24, 2026</p>
+                      <p className="text-white font-medium">March 3, 2026</p>
                     </div>
                   </div>
                   
@@ -441,7 +441,7 @@ export default function RegistrationForm({ onBack }) {
               <div className="bg-[#854d0e20] border border-[#854d0e] rounded-lg p-3 mb-6">
                 <p className="text-[#fbbf24] text-sm flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                  Registration closes February 23, 2026 at 23:59
+                  Registration closes February 27, 2026 at 23:59
                 </p>
               </div>
 

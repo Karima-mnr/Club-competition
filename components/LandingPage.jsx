@@ -347,8 +347,8 @@ export default function LandingPage() {
   })
 
   useEffect(() => {
-    const registrationDeadline = new Date('2026-02-23T00:00:00').getTime()
-    const competitionStart = new Date('2026-02-24T00:00:00').getTime()
+    const registrationDeadline = new Date('2026-02-27T00:00:00').getTime()
+    const competitionStart = new Date('2026-03-03T08:30:00').getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()
@@ -657,7 +657,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-gray-500 mt-4">23 February 2026 • 00:00</p>
+                <p className="text-center text-gray-500 mt-4">27 February 2026 • 00:00</p>
               </motion.div>
 
               <motion.div
@@ -685,7 +685,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-center text-gray-500 mt-4">24 February 2026 • 00:00</p>
+                <p className="text-center text-gray-500 mt-4">03 March 2026 • 08:30</p>
               </motion.div>
             </div>
           </div>

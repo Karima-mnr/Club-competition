@@ -166,7 +166,7 @@ export async function sendRegistrationConfirmation(studentData) {
                                     </td>
                                     <td style="padding-left: 15px; vertical-align: middle;">
                                       <p style="color: #6B7280; font-size: 13px; margin: 0 0 3px;">Date</p>
-                                      <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">February 24, 2026</p>
+                                      <p style="color: #121B21; font-size: 18px; font-weight: 600; margin: 0;">March 3, 2026</p>
                                     </td>
                                   </tr>
                                 </table>
