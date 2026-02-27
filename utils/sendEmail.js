@@ -368,7 +368,7 @@ export async function sendRegistrationConfirmation(studentData) {
                 <tr>
                   <td style="background: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
                     <p style="color: #6B7280; font-size: 12px; margin: 0 0 5px;">© 2026 InfoBrains Club. All rights reserved.</p>
-                    <p style="color: #9CA3AF; font-size: 11px; margin: 0;">University HASSIBA BENBOUALI - Department MI<br>This is an automated message, please do not reply.</p>
+                    <p style="color: #9CA3AF; font-size: 11px; margin: 0;">University HASSIBA BENBOUALI - Department Informatique<br>This is an automated message, please do not reply.</p>
                   </td>
                 </tr>
                 

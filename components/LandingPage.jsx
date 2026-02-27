@@ -346,34 +346,37 @@ export default function LandingPage() {
     competition: { days: 0, hours: 0, minutes: 0, seconds: 0 }
   })
 
-  useEffect(() => {
-    const registrationDeadline = new Date('2026-02-27T00:00:00').getTime()
-    const competitionStart = new Date('2026-03-03T08:30:00').getTime()
+useEffect(() => {
+  const registrationDeadline = new Date('2026-02-28T00:00:00').getTime()
+  const competitionStart = new Date('2026-03-03T08:30:00').getTime()
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime()
+  const timer = setInterval(() => {
+    const now = new Date().getTime()
 
-      const registrationDistance = registrationDeadline - now
-      const competitionDistance = competitionStart - now
+    const registrationDistance = registrationDeadline - now
+    const competitionDistance = competitionStart - now
 
-      setTimeLeft({
-        registration: {
-          days: Math.floor(registrationDistance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((registrationDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((registrationDistance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((registrationDistance % (1000 * 60)) / 1000)
-        },
-        competition: {
-          days: Math.floor(competitionDistance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((competitionDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((competitionDistance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((competitionDistance % (1000 * 60)) / 1000)
-        }
-      })
-    }, 1000)
+    setTimeLeft({
+      registration: {
+        days: Math.max(0, Math.floor(registrationDistance / (1000 * 60 * 60 * 24))),
+        hours: Math.max(0, Math.floor((registrationDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+        minutes: Math.max(0, Math.floor((registrationDistance % (1000 * 60 * 60)) / (1000 * 60))),
+        seconds: Math.max(0, Math.floor((registrationDistance % (1000 * 60)) / 1000)),
+        isExpired: registrationDistance <= 0
+      },
+      competition: {
+        days: Math.max(0, Math.floor(competitionDistance / (1000 * 60 * 60 * 24))),
+        hours: Math.max(0, Math.floor((competitionDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+        minutes: Math.max(0, Math.floor((competitionDistance % (1000 * 60 * 60)) / (1000 * 60))),
+        seconds: Math.max(0, Math.floor((competitionDistance % (1000 * 60)) / 1000)),
+        isExpired: competitionDistance <= 0,
+        isActive: competitionDistance <= 0 && now >= competitionStart
+      }
+    })
+  }, 1000)
 
-    return () => clearInterval(timer)
-  }, [])
+  return () => clearInterval(timer)
+}, [])
 
   if (showForm) {
     return <RegistrationForm onBack={() => setShowForm(false)} language={language} />
@@ -631,62 +634,108 @@ export default function LandingPage() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Registration Deadline */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6 text-center">
-                   {t.registrationEnds}
-                </h3>
+            {/* Registration Deadline */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+                {timeLeft.registration.isExpired ? (
+                  <span className="text-red-400">{language === 'en' ? 'Registration Closed' : 
+                    language === 'fr' ? 'Inscriptions Fermées' : 'التسجيل مغلق'}</span>
+                ) : (
+                  t.registrationEnds
+                )}
+              </h3>
+              {!timeLeft.registration.isExpired ? (
                 <div className="grid grid-cols-4 gap-4">
-                  {Object.entries(timeLeft.registration).map(([unit, value], index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-3xl lg:text-4xl font-bold text-white bg-white/5 rounded-lg p-3 mb-2">
-                        {value.toString().padStart(2, '0')}
+                  {Object.entries(timeLeft.registration).map(([unit, value], index) => {
+                    if (unit === 'isExpired' || unit === 'isActive') return null;
+                    return (
+                      <div key={index} className="text-center">
+                        <div className="text-3xl lg:text-4xl font-bold text-white bg-white/5 rounded-lg p-3 mb-2">
+                          {value.toString().padStart(2, '0')}
+                        </div>
+                        <div className="text-sm text-gray-400">
+                          {unit === 'days' && t.days}
+                          {unit === 'hours' && t.hours}
+                          {unit === 'minutes' && t.minutes}
+                          {unit === 'seconds' && t.seconds}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-400">
-                        {unit === 'days' && t.days}
-                        {unit === 'hours' && t.hours}
-                        {unit === 'minutes' && t.minutes}
-                        {unit === 'seconds' && t.seconds}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
-                <p className="text-center text-gray-500 mt-4">27 February 2026 • 00:00</p>
-              </motion.div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-xl text-gray-400">
+                    {language === 'en' ? 'Registration has ended' : 
+                    language === 'fr' ? 'Les inscriptions sont terminées' : 
+                    'انتهى التسجيل'}
+                  </p>
+                </div>
+              )}
+              <p className="text-center text-gray-500 mt-4">28 February 2026 • 00:00</p>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
-              >
-                <h3 className="text-2xl font-bold text-white mb-6 text-center">
-                  {t.competitionStarts}
-                </h3>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-8"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+                {timeLeft.competition.isExpired ? (
+                  <span className="text-yellow-400">
+                    {language === 'en' ? 'Competition Started' : 
+                    language === 'fr' ? 'Compétition Commencée' : 
+                    'بدأت المسابقة'}
+                  </span>
+                ) : (
+                  t.competitionStarts
+                )}
+              </h3>
+              {!timeLeft.competition.isExpired ? (
                 <div className="grid grid-cols-4 gap-4">
-                  {Object.entries(timeLeft.competition).map(([unit, value], index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-3xl lg:text-4xl font-bold text-white bg-white/5 rounded-lg p-3 mb-2">
-                        {value.toString().padStart(2, '0')}
+                  {Object.entries(timeLeft.competition).map(([unit, value], index) => {
+                    // Filter out the boolean properties
+                    if (unit === 'isExpired' || unit === 'isActive') return null;
+                    return (
+                      <div key={index} className="text-center">
+                        <div className="text-3xl lg:text-4xl font-bold text-white bg-white/5 rounded-lg p-3 mb-2">
+                          {value.toString().padStart(2, '0')}
+                        </div>
+                        <div className="text-sm text-gray-400">
+                          {unit === 'days' && t.days}
+                          {unit === 'hours' && t.hours}
+                          {unit === 'minutes' && t.minutes}
+                          {unit === 'seconds' && t.seconds}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-400">
-                        {unit === 'days' && t.days}
-                        {unit === 'hours' && t.hours}
-                        {unit === 'minutes' && t.minutes}
-                        {unit === 'seconds' && t.seconds}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
-                <p className="text-center text-gray-500 mt-4">03 March 2026 • 08:30</p>
-              </motion.div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-xl text-gray-400">
+                    {timeLeft.competition.isActive ? (
+                      language === 'en' ? 'The competition is now active!' : 
+                      language === 'fr' ? 'La compétition est maintenant active !' : 
+                      'المسابقة نشطة الآن!'
+                    ) : (
+                      language === 'en' ? 'Competition has started' : 
+                      language === 'fr' ? 'La compétition a commencé' : 
+                      'بدأت المسابقة'
+                    )}
+                  </p>
+                </div>
+              )}
+              <p className="text-center text-gray-500 mt-4">03 March 2026 • 08:30</p>
+            </motion.div>
             </div>
           </div>
         </section>
